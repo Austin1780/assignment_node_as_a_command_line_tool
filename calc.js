@@ -8,9 +8,12 @@
   8)If the first character is a '-', redirect to functions that give out info about calc.js
   */
 
+  let calculator = require('./calc_module');
   let fs = require('fs');
   let json = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   //version = json.version
+
+  let math = new calculator();
 
   process.stdin.resume();
   process.stdin.setEncoding('utf-8');
@@ -18,31 +21,14 @@
   process.stdin.on('data', (data)=>
   {
     data = String(data);
-    if (data.charAt(0) === '-'){
+    newArray = data.split(' ');
+
+    /*if (data.charAt(0) === '-'){
       if(data === '-v' || data === '--version'){
         console.log(json.version);
       }
+    }*/
+    if (newArray[0] === 'add'){
+      console.log(math.add(newArray));
     }
   });
-
-
-  class Calculator{
-    constructor(str, numbers){
-      this.str = str;
-      }
-      add(numbers){
-        let sum = 0;
-        for(var i = 0; i < numbers.length; i++){
-          sum += i;
-        }
-        return sum;
-      }
-
-      sub(numbers){
-        let difference = 0;
-        for(var i = 0; i < numbers.length; i++){
-          difference = difference - i;
-        }
-        return difference;
-      }
-    }
