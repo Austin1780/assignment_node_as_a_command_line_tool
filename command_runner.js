@@ -1,10 +1,11 @@
 var cp = require('child_process');
 
 process.stdin.on('data', function(input) {
+  input = String(input).trim();
+  console.log(input);
   if (input === 'q' || input === 'quit') {
     process.exit();
   } else {
-    input = String(input);
     let [cmd, ...args] = input.split(' ');
 
     var cmd1 = cp.spawn(cmd, args);
