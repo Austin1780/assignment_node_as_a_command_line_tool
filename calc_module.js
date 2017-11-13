@@ -2,8 +2,8 @@ class Calculator{
   constructor(){
     }
     add(numbers){
-      let sum = numbers[1];
-      for(var i = 2; i < numbers.length; i++){
+      let sum = numbers[0];
+      for(var i = 1; i < numbers.length; i++){
         sum += numbers[i];
       }
       return sum;

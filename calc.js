@@ -20,15 +20,24 @@
 
   process.stdin.on('data', (data)=>
   {
+    data = data.trim();
     data = String(data);
     newArray = data.split(' ');
+    console.log(newArray);
 
     /*if (data.charAt(0) === '-'){
       if(data === '-v' || data === '--version'){
         console.log(json.version);
       }
     }*/
-    if (newArray[0] === 'add'){
-      console.log(math.add(newArray));
+    if (typeof newArray[0] === 'string'){
+      let string = newArray[0];
+      let nums = newArray.slice(1);
+      let new_nums = nums.map(function(elem, index, arr){
+        return Number(elem);
+      });
+      if (newArray[0] === 'add'){
+          console.log(math.add(new_nums));
+      }
     }
   });
