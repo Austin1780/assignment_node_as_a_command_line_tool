@@ -1,8 +1,8 @@
+var cp = require('child_process');
+
 process.stdin.on('data', function(input) {
   input = String(input);
   let [cmd, ...args] = input.split(' ');
-
-  var cp = require('child_process');
 
   var cmd1 = cp.spawn(cmd, args);
 
