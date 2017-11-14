@@ -23,21 +23,43 @@
     data = data.trim();
     data = String(data);
     newArray = data.split(' ');
-    console.log(newArray);
 
     /*if (data.charAt(0) === '-'){
       if(data === '-v' || data === '--version'){
         console.log(json.version);
       }
     }*/
+
+    let numberArray = [];
+
+    for (i = 0; i < newArray.length; i++) {
+      numberArray.push(Number(newArray[i]));
+    }
+    for (i = 0; i < numberArray.length; i++) {
+      if (typeof numberArray[i] === 'string') {
+        let
+      }
+    }
+
     if (typeof newArray[0] === 'string'){
       let string = newArray[0];
       let nums = newArray.slice(1);
       let new_nums = nums.map(function(elem, index, arr){
         return Number(elem);
       });
-      if (newArray[0] === 'add'){
+      switch(string) {
+        case 'add':
           console.log(math.add(new_nums));
+          break;
+        case 'sub':
+          console.log(math.sub(new_nums));
+          break;
+        case 'div':
+          console.log(math.div(new_nums));
+          break;
+        case 'mult':
+          console.log(math.multi(new_nums));
+          break;
       }
     }
   });
