@@ -24,7 +24,7 @@
 
   var x = 0;
   while(x < (argsArray.length)){
-    var result = 0;
+    let result = 0;
     if (x === 0){
       if (isNaN(argsArray[x])){
         console.log("x: ",argsArray[x]);
@@ -62,7 +62,6 @@
   }
     x++;
   }
-
 
   function mapFunctions(string, arg1, arg2){
       switch(string) {

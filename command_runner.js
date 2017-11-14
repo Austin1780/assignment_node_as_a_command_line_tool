@@ -1,4 +1,4 @@
-var cp = require('child_process');
+let cp = require('child_process');
 
 process.stdin.on('data', function(input) {
   input = String(input).trim();
@@ -8,7 +8,7 @@ process.stdin.on('data', function(input) {
   } else {
     let [cmd, ...args] = input.split(' ');
 
-    var cmd1 = cp.spawn(cmd, args);
+    let cmd1 = cp.spawn(cmd, args);
 
     cmd1.on('error', (err) => {
       console.error(`${ err.stack }`);

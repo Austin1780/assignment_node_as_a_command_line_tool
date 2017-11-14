@@ -1,6 +1,6 @@
 let cp = require('child_process');
 
-var cmd = cp.exec('ps -a', function(err, stdout, stderr){
+let cmd = cp.exec('ps -a', function(err, stdout, stderr){
   if(err) {
     throw err
   };

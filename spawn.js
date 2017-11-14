@@ -1,6 +1,6 @@
-var cp = require('child_process');
+let cp = require('child_process');
 
-var cmd = cp.spawn('ps',['-a'] );
+let cmd = cp.spawn('ps',['-a'] );
 
 cmd.on('error', (err) => {
   console.error(`${ err.stack }`);
