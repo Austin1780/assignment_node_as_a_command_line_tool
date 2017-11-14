@@ -9,57 +9,70 @@
   */
 
   let calculator = require('./calc_module');
-  let fs = require('fs');
-  let json = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  //version = json.version
 
-  let math = new calculator();
 
-  process.stdin.resume();
-  process.stdin.setEncoding('utf-8');
+  let argsArray = process.argv.slice(2);
+  let string = process.argv[2];
+  // console.log(argsArray);
+  let argument = argsArray[0];
+  if(argument === '-v' || argument === '--version'){
+    console.log("The version is 1.0.0");
+  }
+  if(argument === '-h' || argument === '--help'){
+    console.log("Example: Result of calc.js add 1 2 would be 3");
+  }
 
-  process.stdin.on('data', (data)=>
-  {
-    data = data.trim();
-    data = String(data);
-    newArray = data.split(' ');
-
-    /*if (data.charAt(0) === '-'){
-      if(data === '-v' || data === '--version'){
-        console.log(json.version);
-      }
-    }*/
-
-    let numberArray = [];
-
-    for (i = 0; i < newArray.length; i++) {
-      numberArray.push(Number(newArray[i]));
+  var x = 0;
+  while(x < (argsArray.length)){
+    var result = 0;
+    if (x === 0){
+      if (isNaN(argsArray[x])){
+        console.log("x: ",argsArray[x]);
+        let arg1 = Number(argsArray[x+1]);
+        console.log("arg1: ",arg1);
+        let arg2 = Number(argsArray[x+2]);
+        console.log("arg2: ",arg2);
+        result = mapFunctions(argsArray[x],  arg1, arg2);
+        console.log("if statement: ", result);
     }
-    for (i = 0; i < numberArray.length; i++) {
-      if (typeof numberArray[i] === 'string') {
-        let
+  }else if (x > 0 && x < argsArray.length-1){
+      if (isNaN(argsArray[x])){
+        let str = argsArray[x];
+        let arg1 = Number(argsArray[x+1]);
+        let arg2 = Number(argsArray[x+2]);
+        switch(str){
+          case 'add':
+            result += mapFunctions(str, arg1, arg2);
+            return result;
+          case 'sub':
+            result -= mapFunctions(str, arg1, arg2);
+            return result;
+          case 'mult':
+            result = result*mapFunctions(str, arg1, arg2);
+            return result;
+          case 'div':
+            arg1 = result/arg1;
+            result = mapFunctions(str, arg1, arg2);
+            return result;
+        }
       }
-    }
 
-    if (typeof newArray[0] === 'string'){
-      let string = newArray[0];
-      let nums = newArray.slice(1);
-      let new_nums = nums.map(function(elem, index, arr){
-        return Number(elem);
-      });
+  }else{
+    console.log("final result: ", result);
+  }
+    x++;
+  }
+
+
+  function mapFunctions(string, arg1, arg2){
       switch(string) {
         case 'add':
-          console.log(math.add(new_nums));
-          break;
+          return calculator.add(arg1, arg2);
         case 'sub':
-          console.log(math.sub(new_nums));
-          break;
+          return calculator.sub(arg1, arg2);
         case 'div':
-          console.log(math.div(new_nums));
-          break;
+          return calculator.div(arg1, arg2);
         case 'mult':
-          console.log(math.multi(new_nums));
-          break;
+          return calculator.multi(arg1, arg2);
       }
     }
-  });
